@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Calculo de  Integrales </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego de Calculo de  Integrales</h1>
+        <p>Puntos: <span id="score">0</span></p>
+        <div class="game-area">
+            <div class="column left">
+                <div class="item" data-value="32">2 × 6</div>
+                <div class="item" data-value="9">3 × 3</div>
+                <div class="item" data-value="30">5 × 6</div>
+                <div class="item" data-value="24">7 × 2</div>
+                <div class="item" data-value="6">2 × 3</div>
+            </div>
+            <svg id="svg-lines" width="100%" height="100%" style="position: absolute; top: 0; left: 0;"></svg>
+            <div class="column right">
+                <div class="dropzone" data-value="6">6</div>
+                <div class="dropzone" data-value="9">9</div>
+                <div class="dropzone" data-value="24">14</div>
+                <div class="dropzone" data-value="32">12</div>
+                <div class="dropzone" data-value="30">30</div>
+            </div>
+        </div>
+    </div>
+    <div class="contenedor">
+
+        <div class="suelo"></div>
+        
+        <div class="dino dino-corriendo"></div>
+
+        <div class="score">0</div>
+
+    </div>
+
+    <div class="game-over">GAME OVER</div>
+    <script src="script.js"></script>
+</body>
+</html>

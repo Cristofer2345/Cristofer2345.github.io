@@ -1,0 +1,179 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    position: relative;
+}
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+}
+.game-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.item, .dropzone {
+    background: lightblue;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    width: 60px;
+}
+.dropzone {
+    background: lightgray;
+    border: 2px dashed black;
+}
+.selected {
+    background-color: orange !important;
+}
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.contenedor {
+    width: 920px;
+    height: 280px;
+    margin: 0 auto;
+    
+    position: relative;
+
+    background: linear-gradient(#b7d6c7, transparent) #ffe2d1;/*linear-gradient(#90ebff, white);*/
+    transition: background-color 1s linear;
+    overflow: hidden;
+}
+
+.mediodia {
+    background-color: #ffdcf3;
+}
+
+.tarde {
+    background-color: #ffadad;
+}
+
+.noche {
+    background-color: #aca8c7;
+}
+
+.dino {
+    width: 84px;
+    height: 84px;
+
+    position: absolute;
+    bottom: 22px;
+    left: 42px;
+    z-index: 2;
+
+    background: url(img/dino.png) repeat-x 0px 0px;
+    background-size: 336px 84px;
+    background-position-x: 0px;
+
+}
+
+.dino-corriendo {
+    animation: animarDino 0.25s steps(2) infinite;
+}
+.dino-estrellado {
+    background-position-x: -252px;
+}
+
+.suelo {
+    width: 200%;
+    height: 42px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background: url(img/suelo.png) repeat-x 0px 0px;
+    background-size: 50% 42px;
+
+}
+
+.cactus{
+    width: 46px;
+    height: 96px;
+
+    position: absolute;
+    bottom: 16px;
+    left: 600px;
+    z-index: 1;
+
+    background: url(img/cactus1.png) no-repeat;
+}
+.cactus2{
+    width: 98px;
+    height: 66px;
+
+    background: url(img/cactus2.png) no-repeat;
+}
+
+.nube{
+    width: 92px;
+    height: 26px;
+
+    position: absolute;
+    z-index: 0;
+
+    background: url(img/nube.png) no-repeat;
+    background-size: 92px 26px;
+}
+
+.score{
+    width: 100px;
+    height: 30px;
+
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    z-index: 10;
+
+    color: #d48871;
+    font-family: Verdana;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.game-over{
+    display: none;
+
+    position: absolute;
+    width: 100%;
+
+
+    text-align: center;
+    color: #7e928b;
+    font-size: 30px;
+    font-family: Verdana;
+    font-weight: 700;
+}
+
+@keyframes animarDino{
+    from{
+        background-position-x: -84px;
+    }
+    to{
+        background-position-x: -252px;
+    }
+}
+
