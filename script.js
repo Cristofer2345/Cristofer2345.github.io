@@ -1,14 +1,104 @@
 let score = 0;
 const scoreDisplay = document.getElementById("score");
-const items = document.querySelectorAll(".item");
-const dropzones = document.querySelectorAll(".dropzone");
 const svg = document.getElementById("svg-lines");
 const container = document.querySelector(".game-area");
 let selectedItem = null;
 let connections = [];
 const correctVideos = ["videos/correcto1.mp4","videos/coeecto4.mp4", "videos/correcto2.mp4", "videos/correcto3.mp4", "videos/correcto5.mp4", "videos/correcto6.mp4"];
-const incorrectVideos = ["videos/incorrecto1.mp4", "videos/incorrecto2.mp4", "videos/incorrecto3.mp4", "videos/incorrecto4.mp4"];
+const videosIncorrectos = ["videos/incorrecto1.mp4", "videos/incorrecto2.mp4", "videos/incorrecto3.mp4", "videos/incorrecto4.mp4"];
 
+
+const createImageElement = (id,IdResquest) => {
+    const image = document.createElement("img");
+    const imagenesRespuestas = ["videos/imagespika4.jpeg", "videos/imagespikaRespuesta1.jpeg", "/videos/imagespikaRespuesta2.jpeg", "videos/imagespika.jpg","videos/imagespika.jpg"];
+    const imagenesPreguntas = ["videos/imagespika1.jpeg", "videos/imagespikaPregunta1.jpeg", "videos/imgespika2.jpeg", "videos/imagespika.jpg","videos/imagespika.jpg"];
+    if(id === 0){
+        switch (IdResquest) {
+            case "divResult1":
+            image.src = imagenesRespuestas[0];
+            break;
+            case "divResult2":
+            image.src = imagenesRespuestas[1];
+            break;
+            case "divResult3":
+            image.src = imagenesRespuestas[2];
+            break;
+            case "divResult4":
+            image.src = imagenesRespuestas[3];
+            break;
+            default:
+            image.src = imagenesRespuestas[4];
+            break;
+        }
+}else{
+    switch (id) {
+        case "divAsk1":
+            image.src = imagenesPreguntas[0];
+            break;
+        case "divAsk2":
+            image.src = imagenesPreguntas[1];
+            break;
+        case "divAsk3":
+            image.src = imagenesPreguntas[2];
+            break;
+        case "divAsk4":
+            image.src = imagenesPreguntas[3];
+            break;
+        default:
+            image.src = imagenesPreguntas[4];
+            break;
+    }
+}
+    image.style.width = "150px";
+    image.style.height = "50px";
+    return image;
+};
+
+// Function to create and shuffle div elements dynamically
+const createidDivSort = () => {
+    const divData = [
+        { id: "divAsk1", value: 32 },
+        { id: "divAsk2", value: 9 },
+        { id: "divAsk3", value: 30 },
+        { id: "divAsk4", value: 24 },
+        { id: "divAsk5", value: 6 }
+    ];
+    const divResults = [
+        { id: "divResult1", value: 32 },
+        { id: "divResult2", value: 9 },
+        { id: "divResult3", value: 30 },
+        { id: "divResult4", value: 24 },
+        { id: "divResult5", value: 6 }
+    ];
+    
+    // Shuffle the divResults array
+    divResults.sort(() => Math.random() - 0.5);
+    divData.sort(() => Math.random() - 0.5);
+
+    // Create and append div elements dynamically
+    divData.forEach(data => {
+        const div = document.createElement("div");
+        div.id = data.id;
+        div.className = "item";
+        div.setAttribute("data-value", data.value);
+        div.appendChild(createImageElement(data.id));
+        document.querySelector(".column.left").appendChild(div);
+    });
+    divResults.forEach(data => {
+        const div = document.createElement("div");
+        div.id = data.id;
+        div.className = "dropzone";
+        div.setAttribute("data-value", data.value);
+        div.appendChild(createImageElement(0,data.id));
+        document.querySelector(".column.right").appendChild(div);
+    });
+
+};
+
+
+createidDivSort();
+const items = document.querySelectorAll(".item");
+const dropzones = document.querySelectorAll(".dropzone");
 items.forEach(item => {
     item.addEventListener("click", () => {
         if (selectedItem) {
@@ -62,7 +152,7 @@ function drawLine(startElement, endElement) {
 
 
 function showVideo(isCorrect) {
-    const videoList = isCorrect ? correctVideos : incorrectVideos;
+    const videoList = isCorrect ? correctVideos : videosIncorrectos;
     const randomIndex = Math.floor(Math.random() * videoList.length);
     const videoSrc = videoList[randomIndex];
     const imageSrc = "videos/imagespika.jpg";

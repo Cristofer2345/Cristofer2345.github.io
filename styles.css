@@ -27,12 +27,12 @@ body {
 }
 .item, .dropzone {
     background: lightblue;
-    padding: 10px;
+    padding: 2px;
     margin: 5px;
     cursor: pointer;
     border-radius: 5px;
     text-align: center;
-    width: 60px;
+    width: auto;
 }
 .dropzone {
     background: lightgray;
@@ -167,6 +167,7 @@ svg {
     font-family: Verdana;
     font-weight: 700;
 }
+ 
 
 @keyframes animarDino{
     from{
