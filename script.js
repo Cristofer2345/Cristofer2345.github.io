@@ -10,8 +10,9 @@ const videosIncorrectos = ["videos/incorrecto1.mp4", "videos/incorrecto2.mp4", "
 
 const createImageElement = (id,IdResquest) => {
     const image = document.createElement("img");
-    const imagenesRespuestas = ["videos/imagespika4.jpeg", "videos/imagespikaRespuesta1.jpeg", "/videos/imagespikaRespuesta2.jpeg", "videos/imagespika.jpg","videos/imagespika.jpg"];
-    const imagenesPreguntas = ["videos/imagespika1.jpeg", "videos/imagespikaPregunta1.jpeg", "videos/imgespika2.jpeg", "videos/imagespika.jpg","videos/imagespika.jpg"];
+    const imagenesRespuestas = ["/uno/Respuesta.jpg", "/dos/Respuesta.jpg", "/tres/solucion.jpg", "/cuatro/Respuesta.jpg","videos/imagespika.jpg"];
+    const imagenesPreguntas = ["/uno/Pregunta.jpg", "/dos/Pregunta.jpg", "/tres/pregunta3.jpg", "/cuatro/pregunta.jpg","videos/imagespika.jpg"];
+
     if(id === 0){
         switch (IdResquest) {
             case "divResult1":
@@ -52,6 +53,29 @@ const createImageElement = (id,IdResquest) => {
     image.style.width = "150px";
     image.style.height = "50px";
     return image;
+};
+const createImageElementEjemplo = (id) => {
+  
+    const imagenesRetroalimentacion = ["/uno/retro1.jpg", "/dos/solucion.jpg", "/tres/Retro3.jpg", "/cuatro/retro4.jpg","videos/imagespika.jpg"];
+    let imageSrc;
+    switch (Number(id)) {
+        case 32:
+            imageSrc = imagenesRetroalimentacion[0];
+            break;
+        case 9:
+            imageSrc = imagenesRetroalimentacion[1];
+            break;
+        case 30:
+            imageSrc = imagenesRetroalimentacion[2];
+            break;
+        case 24:
+            imageSrc = imagenesRetroalimentacion[3];
+            break;
+        default:
+            imageSrc = imagenesRetroalimentacion[4];
+            break;
+    }
+    return imageSrc;
 };
 
 // Function to create and shuffle div elements dynamically
@@ -110,17 +134,33 @@ items.forEach(item => {
 });
 
 dropzones.forEach(dropzone => {
+    
     dropzone.addEventListener("click", () => {
+        const items = document.querySelectorAll(".item");
+    let selectedItem1 = null;
         if (selectedItem) {
             if (selectedItem.getAttribute("data-value") === dropzone.getAttribute("data-value")) {
                 drawLine(selectedItem, dropzone);
                 score += 5;
-                
-                showVideo(true);
+                dropzone.setAttribute("data-value", selectedItem.getAttribute("data-value"));
+                items.forEach(item => {
+                    
+                    if (item.classList.contains("selected")) {
+                      
+                        selectedItem1 =   item.getAttribute("data-value");
+                    }
+                });
+                showVideo(true,selectedItem1);
                 Init();
             } else {
+                items.forEach(item => {
+                    if (item.classList.contains("selected")) {
+                       
+                        selectedItem1 =   item.getAttribute("data-value");
+                    }
+                });
                 score -= 1;
-                showVideo(false);
+                showVideo(false,selectedItem1);
             }
             scoreDisplay.textContent = score;
             selectedItem.classList.remove("selected");
@@ -151,7 +191,7 @@ function drawLine(startElement, endElement) {
 }
 
 
-function showVideo(isCorrect) {
+function showVideo(isCorrect,id) {
     const videoList = isCorrect ? correctVideos : videosIncorrectos;
     const randomIndex = Math.floor(Math.random() * videoList.length);
     const videoSrc = videoList[randomIndex];
@@ -165,7 +205,7 @@ function showVideo(isCorrect) {
                 <source src="${videoSrc}" type="video/mp4">
                 Tu navegador no soporta el video.
             </video>
-            <img id="endImage" src="${imageSrc}" alt="Imagen final" style="display: none; width: 100%;">
+            <img id="endImage" src="${createImageElementEjemplo(id)}" alt="Imagen final" style="display: none; width: 100%;">
             <button class="close-btn" onclick="closeModal(this,${isCorrect})">Cerrar</button>
         </div>
     `;
@@ -472,8 +512,7 @@ function GanarPuntos() {
 
 function GameOver() {
     Estrellarse();
-    alert("Resulve esta integral para seguir jugando ");
-    gameOver.style.display = "block";
+    alert("Resuelve una Integral para continuar");
 }
 
 function DetectarColision() {
